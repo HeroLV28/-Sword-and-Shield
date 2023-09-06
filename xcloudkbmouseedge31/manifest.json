@@ -1,0 +1,81 @@
+{
+  "manifest_version": 3,
+  "name": "Keyboard & Mouse for Xbox xCloud",
+  "short_name": "xCloud KB&M",
+  "description": "Play Xbox Cloud Gaming (Project xCloud) with a keyboard and mouse.",
+  "version": "3.1",
+  "author": "David Idol",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon-16.png",
+      "24": "icon-24.png",
+      "32": "icon-32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "xCloud keyboard and mouse"
+  },
+  "commands": {
+    "profile-prev": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left",
+        "mac": "Command+Shift+Left"
+      },
+      "description": "Previous keyboard/mouse profile"
+    },
+    "profile-next": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right",
+        "mac": "Command+Shift+Right"
+      },
+      "description": "Next keyboard/mouse profile"
+    },
+    "show-hide-cheatsheet": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+I",
+        "mac": "Command+Shift+I"
+      },
+      "description": "Show/hide cheatsheet overlay"
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.xbox.com/*",
+        "https://gamepad-tester.com/"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "js/vendor.js",
+        "js/injected.js",
+        "css/injected.css",
+        "css/shared.css",
+        "icon-16.png",
+        "images/*"
+      ],
+      "matches": [
+        "https://www.xbox.com/*",
+        "https://gamepad-tester.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
+}
